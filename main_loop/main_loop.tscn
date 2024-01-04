@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdpg8f4i4x0a0"]
-
-[ext_resource type="Script" path="res://main_loop/main_loop.gd" id="1_gsjmn"]
-
-[node name="MainLoop" type="Node"]
-script = ExtResource("1_gsjmn")
-connection_string = "ws://localhost:5002/ws"

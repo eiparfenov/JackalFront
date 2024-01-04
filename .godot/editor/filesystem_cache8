@@ -1,6 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1704206461
-icon.svg::CompressedTexture2D::5732207412386473326::1704204230::1704204234::1::::<><>::
-::res://main_loop/::1704205368
-main_loop.gd::GDScript::-1::1704205368::0::1::::<>Node<>::
-main_loop.tscn::PackedScene::2628376421892804037::1704205368::0::1::::<><>::res://main_loop/main_loop.gd
+::res://::1704372185
+icon.svg::CompressedTexture2D::5732207412386473326::1704216949::1704216949::1::::<><>::
+README.md::TextFile::-1::1704216949::0::1::::<><>::
+::res://websocket_worker/::1704368310
+websocket_worker.gd::GDScript::-1::1704368310::0::1::::WebsocketWorker<>Node<>::
+websocket_worker.tscn::PackedScene::2628376421892804037::1704287021::0::1::::<><>::res://websocket_worker/websocket_worker.gd

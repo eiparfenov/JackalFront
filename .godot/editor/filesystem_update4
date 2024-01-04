@@ -1,2 +1,2 @@
-res://main_loop/main_loop.tscn
-res://main_loop/main_loop.gd
+res://websocket_worker/websocket_worker.tscn
+res://websocket_worker/websocket_worker.gd

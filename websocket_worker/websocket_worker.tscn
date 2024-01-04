@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdpg8f4i4x0a0"]
+
+[ext_resource type="Script" path="res://websocket_worker/websocket_worker.gd" id="1_yos7r"]
+
+[node name="WebsocketWorker" type="Node"]
+script = ExtResource("1_yos7r")
+connection_string = "ws://localhost:5002/ws"
