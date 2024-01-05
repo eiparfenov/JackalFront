@@ -39,30 +39,19 @@ func test():
 		"player_owner": 1,
 		"ship_type": "simple"
 	})
-	await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_pirate",
-		"position": {
-			"x": 0,
-			"y": 7
-		},
-		"pirate_id": "83338b84-0476-43ad-91a4-d5574fb2fd6c",
-		"player_owner": 1,
-		"pirate_type": "simple"
-	})
-	await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_pirate",
-		"position": {
-			"x": 0,
-			"y": 7
-		},
-		"pirate_id": "83338a84-0476-43ad-91a4-d5574fb2fd6c",
-		"player_owner": 1,
-		"pirate_type": "simple"
-	})
+	for i in 16:
+		await get_tree().create_timer(1).timeout
+		execute_action.emit({
+			"for_player": -1,
+			"type": "spawn_pirate",
+			"position": {
+				"x": 0,
+				"y": 7
+			},
+			"pirate_id": "%s" %i,
+			"player_owner": 1,
+			"pirate_type": "simple"
+		})
 
 func _ready():
 	test()
