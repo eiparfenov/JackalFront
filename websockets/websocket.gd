@@ -21,21 +21,18 @@ func start_game(player_name: String, selected_color: int):
 
 func test():
 	await get_tree().create_timer(3).timeout
-	
 	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_pirate",
-		"position": {
-			"x": 4,
-			"y": 1
-		},
-		"pirate_id": "1",
-		"player_owner": 2,
-		"pirate_type": "simple"
-	})
-	
-	'''for i in 3:
-		await get_tree().create_timer(1).timeout
+			"for_player": -1,
+			"type": "spawn_ship",
+			"position": {
+				"x": -7,
+				"y": 0
+			},
+			"ship_id": "3",
+			"player_owner": 2,
+			"ship_type": "simple"
+		})
+	for i in 3:
 		execute_action.emit({
 			"for_player": -1,
 			"type": "spawn_pirate",
@@ -46,7 +43,7 @@ func test():
 			"pirate_id": "%s" %i,
 			"player_owner": 2,
 			"pirate_type": "simple"
-		})'''
+		})
 		
 	game_started.emit(
 		1,  
@@ -69,14 +66,14 @@ func test():
 		}
 		]
 	)
-	'''add_option.emit(
+	add_option.emit(
 		{
 		"group_id": "not grouped",
 		"for_player": 0,
 		"id": "000",
 		"type": "select_pirate",
 		"pirate_id": "0"
-		})'''
+		})
 	add_option.emit(
 		{
 		"group_id": "not grouped",
@@ -85,14 +82,14 @@ func test():
 		"type": "select_pirate",
 		"pirate_id": "1"
 		})
-	'''add_option.emit(
+	add_option.emit(
 		{
 		"group_id": "not grouped",
 		"for_player": 0,
 		"id": "222",
 		"type": "select_pirate",
 		"pirate_id": "2"
-		})'''
+		})
 
 
 func _ready():

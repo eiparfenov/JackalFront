@@ -4,5 +4,4 @@
 
 [node name="Websocket" type="Node"]
 script = ExtResource("1_qoy30")
-test_mode = false
 connect_url = "ws://localhost:5002"
