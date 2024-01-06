@@ -88,6 +88,16 @@ func test():
 			"player_owner": 1,
 			"pirate_type": "simple"
 		})
+		execute_action.emit({
+			"for_player": -1,
+			"type": "open_card",
+			"position": {
+				"x": 6,
+				"y": 0
+			},
+			"rotation": 0,
+			"frame": 40
+		})
 	for i in 16:
 		await get_tree().create_timer(1).timeout
 		execute_action.emit({

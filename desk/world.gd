@@ -53,5 +53,8 @@ func _on_websocket_execute_action(action:Dictionary):
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		old_tile.remove_child(pirate)
 		new_tile.add_child(pirate)
+	elif action["type"] == "open_card":
+		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
+		tile.open_frame(action["frame"], action["rotation"])
 	elif action["type"] == "ready_to_start":
 		$WaitingFiller.visible = false

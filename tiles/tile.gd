@@ -1,9 +1,9 @@
 extends Sprite2D
 
 
-func open_frame(num: int):
+func open_frame(num: int, rot: int = randi_range(0, 3)):
 	frame = num
-	rotation_degrees = randi_range(0, 3) * 90
+	rotation_degrees = rot * 90
 
 
 func recalculate_children(corrector = []):
