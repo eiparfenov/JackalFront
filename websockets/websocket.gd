@@ -15,6 +15,34 @@ func start_game(player_name: String, selected_color: int):
 
 
 func test():
+	await get_tree().create_timer(3).timeout
+	
+	execute_action.emit({
+		"for_player": -1,
+		"type": "spawn_pirate",
+		"position": {
+			"x": 4,
+			"y": 1
+		},
+		"pirate_id": "1",
+		"player_owner": 2,
+		"pirate_type": "simple"
+	})
+	
+	'''for i in 3:
+		await get_tree().create_timer(1).timeout
+		execute_action.emit({
+			"for_player": -1,
+			"type": "spawn_pirate",
+			"position": {
+				"x": -7,
+				"y": 0
+			},
+			"pirate_id": "%s" %i,
+			"player_owner": 2,
+			"pirate_type": "simple"
+		})'''
+		
 	game_started.emit(
 		1,  
 		[
@@ -36,106 +64,29 @@ func test():
 		}
 		]
 	)
+	'''add_option.emit(
+		{
+		"group_id": "not grouped",
+		"for_player": 0,
+		"id": "000",
+		"type": "select_pirate",
+		"pirate_id": "0"
+		})'''
 	add_option.emit(
 		{
 		"group_id": "not grouped",
 		"for_player": 0,
-		"id": "d6c86421-6968-4c65-948e-c634901d9487",
+		"id": "111",
 		"type": "select_pirate",
-		"pirate_id": "1c1e6f8c-f858-46e6-9d93-8f158c6a0dc3"
+		"pirate_id": "1"
 		})
-	'''await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_ship",
-		"position": {
-			"x": -7,
-			"y": 0
-		},
-		"ship_id": "44738c84-0476-43ad-91a4-d5574fy2fd6c",
-		"player_owner": 2,
-		"ship_type": "simple"
-	})
-	await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_ship",
-		"position": {
-			"x": 0,
-			"y": 7
-		},
-		"ship_id": "83338c84-0476-43ad-91a4-d5574fb2fd6c",
-		"player_owner": 1,
-		"ship_type": "simple"
-	})
-	await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_ship",
-		"position": {
-			"x": 0,
-			"y": -7
-		},
-		"ship_id": "83338c84-0476-42gd-91a4-d5574fb2fd6c",
-		"player_owner": 0,
-		"ship_type": "simple"
-	})
-	await get_tree().create_timer(2).timeout
-	execute_action.emit({
-		"for_player": -1,
-		"type": "spawn_ship",
-		"position": {
-			"x": 7,
-			"y": 0
-		},
-		"ship_id": "83338c84-0896-43ad-91a4-d5574fb2fd6c",
-		"player_owner": 3,
-		"ship_type": "simple"
-	})
-	execute_action.emit({
-		"type": "ready_to_start"
-	})
-	execute_action.emit({
-		"type": "move_ship",
-		"position": {
-			"x": 7,
-			"y": 3
-		},
-		"ship_id": "83338c84-0896-43ad-91a4-d5574fb2fd6c"
-	})
-	
-	for i in 16:
-		#await get_tree().create_timer(1).timeout
-		execute_action.emit({
-			"for_player": -1,
-			"type": "spawn_pirate",
-			"position": {
-				"x": 0,
-				"y": 7
-			},
-			"pirate_id": "%s" %i,
-			"player_owner": 1,
-			"pirate_type": "simple"
-		})
-		execute_action.emit({
-			"for_player": -1,
-			"type": "open_card",
-			"position": {
-				"x": 6,
-				"y": 0
-			},
-			"rotation": 0,
-			"frame": 40
-		})
-	for i in 16:
-		await get_tree().create_timer(1).timeout
-		execute_action.emit({
-			"type": "move_pirate",
-			"position": {
-				"x": 0,
-				"y": 6
-			},
-			"pirate_id": "%s" % i
+	'''add_option.emit(
+		{
+		"group_id": "not grouped",
+		"for_player": 0,
+		"id": "222",
+		"type": "select_pirate",
+		"pirate_id": "2"
 		})'''
 
 
