@@ -6,7 +6,7 @@ class_name Websocket
 
 signal execute_action(action: Dictionary)
 signal add_option(option: Dictionary)
-signal game_started(game_info: Array[String])
+signal game_started(selected_color: int, game_info: Dictionary)
 
 var socket: WebSocketPeer = WebSocketPeer.new()
 
@@ -141,4 +141,13 @@ func _process(delta):
 
 
 func _process_packet(packet):
-	print(packet)
+	var response = str_to_var(packet)
+	match response:
+		{"event_type": "game_started", "color": var color, "players": var players}:
+			game_started.emit(color, players)
+		{"event_type": "game_step", "actions": var actions, "options": var options}:
+			for opt in options:
+				print(opt)
+			for act in actions:
+				print(act)	
+			
