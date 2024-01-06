@@ -22,22 +22,26 @@ func _on_websocket_game_started(selected_color: int, game_info: Array):
 
 
 var pirate_button = 0
-
 func _on_websocket_add_option(option: Dictionary):
 	if option["type"] == "select_pirate":
 		pirate_button += 1
 		var pirate = get_parent().get_parent().find_child(option["pirate_id"], true, false)
 		var button = Button.new()
-		add_child(button)
+		$PirateChooser.add_child(button)
 		button.modulate = "00ff00"
 		button.position = Vector2(pirate_button * 200, 500)
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.pressed.connect(func (): _on_button_pressed(String(button.name), pirate))
+		button.pressed.connect(func (): _on_pirate_button_pressed(String(button.name), pirate))
 
-
-func _on_button_pressed(id, pirate):
-	var button = get_node(id)
+var condition: int = 0
+var zoom = [1, 1.5]
+func _on_pirate_button_pressed(id, pirate):
+	var button = $PirateChooser.get_node(id)
 	var tile = pirate.get_parent()
-	print(pirate)
+	condition += 1
+	for other_button in $PirateChooser.get_children():
+		if other_button != button:
+			other_button.disabled = condition % 2
+			pirate.scale = Vector2(zoom[condition % 2], zoom[condition % 2])
