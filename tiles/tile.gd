@@ -6,12 +6,13 @@ func open_frame(num: int):
 	rotation_degrees = randi_range(0, 3) * 90
 
 
-func recalculate_children():
-	var children_count = get_child_count()
+func recalculate_children(corrector = []):
+	var children_count = get_child_count() - corrector.size()
 	var counter = 0 
 	for child in get_children():
-		child.position = children_position[children_count][counter]
-		counter += 1
+		if child.name not in corrector:
+			child.position = children_position[children_count][counter]
+			counter += 1
 
 
 func _on_child_entered_tree(node):
@@ -19,7 +20,7 @@ func _on_child_entered_tree(node):
 
 
 func _on_child_exiting_tree(node):
-	recalculate_children()
+	recalculate_children([node.name])
 
 
 var children_position = {1: [

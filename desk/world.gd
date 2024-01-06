@@ -47,12 +47,11 @@ func _on_websocket_execute_action(action:Dictionary):
 		var ship = get_node("./%s" % action["ship_id"])
 		ship.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 	elif action["type"] == "move_pirate":
-		var pirate = find_child(action["pirate_id"], true)
-		'''var old_tile = pirate.get_parent()
+		var pirate = find_child(action["pirate_id"], true, false)
+		var old_tile = pirate.get_parent()
 		var new_tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
-		old_tile.remove_child(pirate)
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
-		new_tile.add_child(pirate)'''
-		print(pirate)
+		old_tile.remove_child(pirate)
+		new_tile.add_child(pirate)
 	elif action["type"] == "ready_to_start":
 		$WaitingFiller.visible = false

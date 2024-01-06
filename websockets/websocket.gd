@@ -88,38 +88,17 @@ func test():
 			"player_owner": 1,
 			"pirate_type": "simple"
 		})
-	execute_action.emit({
-		"type": "move_pirate",
-		"position": {
-			"x": 1,
-			"y": 7
-		},
-		"pirate_id": "1"
-	})
-	execute_action.emit({
-		"type": "move_pirate",
-		"position": {
-			"x": 1,
-			"y": 7
-		},
-		"pirate_id": "15"
-	})
-	execute_action.emit({
-		"type": "move_pirate",
-		"position": {
-			"x": 1,
-			"y": 7
-		},
-		"pirate_id": "10"
-	})
-	execute_action.emit({
-		"type": "move_pirate",
-		"position": {
-			"x": 1,
-			"y": 7
-		},
-		"pirate_id": "0"
-	})
+	for i in 16:
+		await get_tree().create_timer(1).timeout
+		execute_action.emit({
+			"type": "move_pirate",
+			"position": {
+				"x": 1,
+				"y": 7
+			},
+			"pirate_id": "%s" % i
+		})
+
 
 func _ready():
 	test()
