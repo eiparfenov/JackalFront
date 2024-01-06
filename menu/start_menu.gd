@@ -1,6 +1,6 @@
 extends Control
 
-var waiting_menu_scene = preload("res://menu/waiting_menu.tscn")
+var waiting_menu_scene = preload("res://desk/world.tscn")
 
 @onready var nick_name_text_edit = $NickNameTextEdit
 @onready var color_select = $ColorSelect

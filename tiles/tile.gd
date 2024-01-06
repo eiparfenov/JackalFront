@@ -1,5 +1,6 @@
 extends Sprite2D
 
+
 func open_frame(num: int):
 	frame = num
 	rotation_degrees = randi_range(0, 3) * 90
@@ -10,7 +11,6 @@ func recalculate_children():
 	var counter = 0 
 	for child in get_children():
 		child.position = children_position[children_count][counter]
-		print(child.position)
 		counter += 1
 
 

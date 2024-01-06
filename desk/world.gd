@@ -7,6 +7,7 @@ var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
 @onready var pirates_parent = $Pirates
 @onready var websocket: Websocket = get_node("/root/WebSocket") 
 
+
 func _ready():
 	websocket.execute_action.connect(_on_websocket_execute_action)
 	websocket.add_option.connect(_on_websocket_add_option)
@@ -37,7 +38,21 @@ func _on_websocket_execute_action(action:Dictionary):
 		ship.ship_generation(action["player_owner"])
 	elif action["type"] == "spawn_pirate" and action["pirate_type"] == "simple":
 		var pirate = pirate_scene.instantiate()
+		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		pirate.name = action["pirate_id"]
 		pirate.pirate_generation(action["player_owner"])
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
-		get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]]).add_child(pirate)
+		tile.add_child(pirate)
+	elif action["type"] == "move_ship":
+		var ship = get_node("./%s" % action["ship_id"])
+		ship.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
+	elif action["type"] == "move_pirate":
+		var pirate = find_child(action["pirate_id"], true)
+		'''var old_tile = pirate.get_parent()
+		var new_tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
+		old_tile.remove_child(pirate)
+		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
+		new_tile.add_child(pirate)'''
+		print(pirate)
+	elif action["type"] == "ready_to_start":
+		$WaitingFiller.visible = false

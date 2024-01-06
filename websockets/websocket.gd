@@ -23,8 +23,8 @@ func test():
 			"x": -7,
 			"y": 0
 		},
-		"ship_id": "83738c84-0476-43ad-91a4-d5574fb2fd6c",
-		"player_owner": 0,
+		"ship_id": "44738c84-0476-43ad-91a4-d5574fy2fd6c",
+		"player_owner": 2,
 		"ship_type": "simple"
 	})
 	await get_tree().create_timer(2).timeout
@@ -39,8 +39,44 @@ func test():
 		"player_owner": 1,
 		"ship_type": "simple"
 	})
+	await get_tree().create_timer(2).timeout
+	execute_action.emit({
+		"for_player": -1,
+		"type": "spawn_ship",
+		"position": {
+			"x": 0,
+			"y": -7
+		},
+		"ship_id": "83338c84-0476-42gd-91a4-d5574fb2fd6c",
+		"player_owner": 0,
+		"ship_type": "simple"
+	})
+	await get_tree().create_timer(2).timeout
+	execute_action.emit({
+		"for_player": -1,
+		"type": "spawn_ship",
+		"position": {
+			"x": 7,
+			"y": 0
+		},
+		"ship_id": "83338c84-0896-43ad-91a4-d5574fb2fd6c",
+		"player_owner": 3,
+		"ship_type": "simple"
+	})
+	execute_action.emit({
+		"type": "ready_to_start"
+	})
+	execute_action.emit({
+		"type": "move_ship",
+		"position": {
+			"x": 7,
+			"y": 3
+		},
+		"ship_id": "83338c84-0896-43ad-91a4-d5574fb2fd6c"
+	})
+	
 	for i in 16:
-		await get_tree().create_timer(1).timeout
+		#await get_tree().create_timer(1).timeout
 		execute_action.emit({
 			"for_player": -1,
 			"type": "spawn_pirate",
@@ -52,6 +88,38 @@ func test():
 			"player_owner": 1,
 			"pirate_type": "simple"
 		})
+	execute_action.emit({
+		"type": "move_pirate",
+		"position": {
+			"x": 1,
+			"y": 7
+		},
+		"pirate_id": "1"
+	})
+	execute_action.emit({
+		"type": "move_pirate",
+		"position": {
+			"x": 1,
+			"y": 7
+		},
+		"pirate_id": "15"
+	})
+	execute_action.emit({
+		"type": "move_pirate",
+		"position": {
+			"x": 1,
+			"y": 7
+		},
+		"pirate_id": "10"
+	})
+	execute_action.emit({
+		"type": "move_pirate",
+		"position": {
+			"x": 1,
+			"y": 7
+		},
+		"pirate_id": "0"
+	})
 
 func _ready():
 	test()
