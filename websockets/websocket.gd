@@ -3,7 +3,7 @@ class_name Websocket
 
 signal execute_action(action: Dictionary)
 signal add_option(option: Dictionary)
-signal game_started(game_info: Array[String])
+signal game_started(selected_color: int, game_info: Array)
 
 
 func select_option(option_id: String):
@@ -15,7 +15,28 @@ func start_game(player_name: String, selected_color: int):
 
 
 func test():
-	await get_tree().create_timer(2).timeout
+	game_started.emit(
+		1,  
+		[
+		{
+		"player": "<name>",
+		"color": 0
+		},
+		{
+		"player": "<name>",
+		"color": 1
+		},
+		{
+		"player": "<name>",
+		"color": 2
+		},
+		{
+		"player": "<name>",
+		"color": 3
+		}
+		]
+	)
+	'''await get_tree().create_timer(2).timeout
 	execute_action.emit({
 		"for_player": -1,
 		"type": "spawn_ship",
@@ -103,12 +124,13 @@ func test():
 		execute_action.emit({
 			"type": "move_pirate",
 			"position": {
-				"x": 1,
-				"y": 7
+				"x": 0,
+				"y": 6
 			},
 			"pirate_id": "%s" % i
-		})
+		})'''
 
 
 func _ready():
 	test()
+

@@ -4,7 +4,6 @@ var tile_scene: PackedScene = preload("res://tiles/tile.tscn")
 var ship_scene: PackedScene = preload("res://tiles/ship.tscn")
 var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
 
-@onready var pirates_parent = $Pirates
 @onready var websocket: Websocket = get_node("/root/WebSocket") 
 
 
@@ -29,7 +28,7 @@ func _on_websocket_add_option(option: Dictionary):
 	pass # Replace with function body.
 
 
-func _on_websocket_execute_action(action:Dictionary):
+func _on_websocket_execute_action(action: Dictionary):
 	if action["type"] == "spawn_ship" and action["ship_type"] == "simple":
 		var ship = ship_scene.instantiate()
 		add_child(ship)
@@ -56,5 +55,8 @@ func _on_websocket_execute_action(action:Dictionary):
 	elif action["type"] == "open_card":
 		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])
+	elif action["type"] == "select_pirate":
+		var pirate = find_child(action["pirate_id"], true, false)
+		var tile = pirate.get_parent()
 	elif action["type"] == "ready_to_start":
-		$WaitingFiller.visible = false
+		$UI/WaitingFiller.visible = false
