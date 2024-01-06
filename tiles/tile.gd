@@ -15,6 +15,14 @@ func recalculate_children(corrector = []):
 			counter += 1
 
 
+func _on_child_entered_tree(node):
+	recalculate_children() 
+
+
+func _on_child_exiting_tree(node):
+	recalculate_children() 
+
+
 var children_position = {1: [
 							Vector2(0, 0)
 							], 

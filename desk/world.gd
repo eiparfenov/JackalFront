@@ -37,7 +37,6 @@ func _on_websocket_execute_action(action: Dictionary):
 		pirate.pirate_generation(action["player_owner"])
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		tile.add_child(pirate)
-		tile.recalculate_children()
 	elif action["type"] == "move_ship":
 		var ship = get_node("./%s" % action["ship_id"])
 		ship.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
@@ -47,9 +46,7 @@ func _on_websocket_execute_action(action: Dictionary):
 		var new_tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		old_tile.remove_child(pirate)
-		old_tile.recalculate_children()
 		new_tile.add_child(pirate)
-		new_tile.recalculate_children()
 	elif action["type"] == "open_card":
 		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])

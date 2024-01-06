@@ -1,7 +1,6 @@
 extends Control
 
 @onready var websocket: Websocket = get_node("/root/WebSocket")
-signal button_pressed
 
 var color = ["ffffff", "000000", "ff0000", "ffe600"]
 
@@ -28,7 +27,6 @@ func _on_websocket_add_option(option: Dictionary):
 	if option["type"] == "select_pirate":
 		pirate_button += 1
 		var pirate = get_parent().get_parent().find_child(option["pirate_id"], true, false)
-		var tile = pirate.get_parent()
 		var button = Button.new()
 		add_child(button)
 		button.modulate = "00ff00"
@@ -36,13 +34,10 @@ func _on_websocket_add_option(option: Dictionary):
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.button_pressed.connect(_on_button_pressed)
+		button.pressed.connect(func (): _on_button_pressed(String(button.name), pirate))
 
 
-func _process(delta):
-	if :
-		button_pressed.emit()
-		
-func _on_button_pressed():
-	print(2) # Replace with function body.
-
+func _on_button_pressed(id, pirate):
+	var button = get_node(id)
+	var tile = pirate.get_parent()
+	print(pirate)
