@@ -9,7 +9,6 @@ var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
 
 func _ready():
 	websocket.execute_action.connect(_on_websocket_execute_action)
-	websocket.add_option.connect(_on_websocket_add_option)
 	var field_size = [17, 17]
 	var water_range = [2, 2]
 	for x in field_size[0]:
@@ -22,10 +21,6 @@ func _ready():
 				tile.open_frame(63)
 			else:
 				tile.open_frame(0)
-
-
-func _on_websocket_add_option(option: Dictionary):
-	pass # Replace with function body.
 
 
 func _on_websocket_execute_action(action: Dictionary):
@@ -55,8 +50,5 @@ func _on_websocket_execute_action(action: Dictionary):
 	elif action["type"] == "open_card":
 		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])
-	elif action["type"] == "select_pirate":
-		var pirate = find_child(action["pirate_id"], true, false)
-		var tile = pirate.get_parent()
 	elif action["type"] == "ready_to_start":
 		$UI/WaitingFiller.visible = false

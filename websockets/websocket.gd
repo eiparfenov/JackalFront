@@ -36,6 +36,14 @@ func test():
 		}
 		]
 	)
+	add_option.emit(
+		{
+		"group_id": "not grouped",
+		"for_player": 0,
+		"id": "d6c86421-6968-4c65-948e-c634901d9487",
+		"type": "select_pirate",
+		"pirate_id": "1c1e6f8c-f858-46e6-9d93-8f158c6a0dc3"
+		})
 	'''await get_tree().create_timer(2).timeout
 	execute_action.emit({
 		"for_player": -1,
