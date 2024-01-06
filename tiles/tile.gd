@@ -15,7 +15,7 @@ func recalculate_children(corrector = []):
 			counter += 1
 
 
-func _on_child_entered_tree(node):
+func _on_child_entered_tree():
 	recalculate_children()
 
 

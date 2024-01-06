@@ -4,13 +4,11 @@ var tile_scene: PackedScene = preload("res://tiles/tile.tscn")
 var ship_scene: PackedScene = preload("res://tiles/ship.tscn")
 var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
 
-@onready var pirates_parent = $Pirates
 @onready var websocket: Websocket = get_node("/root/WebSocket") 
 
 
 func _ready():
 	websocket.execute_action.connect(_on_websocket_execute_action)
-	websocket.add_option.connect(_on_websocket_add_option)
 	var field_size = [17, 17]
 	var water_range = [2, 2]
 	for x in field_size[0]:
@@ -25,11 +23,7 @@ func _ready():
 				tile.open_frame(0)
 
 
-func _on_websocket_add_option(option: Dictionary):
-	pass # Replace with function body.
-
-
-func _on_websocket_execute_action(action:Dictionary):
+func _on_websocket_execute_action(action: Dictionary):
 	if action["type"] == "spawn_ship" and action["ship_type"] == "simple":
 		var ship = ship_scene.instantiate()
 		add_child(ship)
@@ -57,4 +51,4 @@ func _on_websocket_execute_action(action:Dictionary):
 		var tile = get_node("./tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])
 	elif action["type"] == "ready_to_start":
-		$WaitingFiller.visible = false
+		$UI/WaitingFiller.visible = false

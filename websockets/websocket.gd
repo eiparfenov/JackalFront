@@ -6,7 +6,7 @@ class_name Websocket
 
 signal execute_action(action: Dictionary)
 signal add_option(option: Dictionary)
-signal game_started(selected_color: int, game_info: Dictionary)
+signal game_started(selected_color: int, game_info: Array)
 
 var socket: WebSocketPeer = WebSocketPeer.new()
 
@@ -20,7 +20,36 @@ func start_game(player_name: String, selected_color: int):
 
 
 func test():
-	await get_tree().create_timer(2).timeout
+	game_started.emit(
+		1,  
+		[
+		{
+		"player": "<name>",
+		"color": 0
+		},
+		{
+		"player": "<name>",
+		"color": 1
+		},
+		{
+		"player": "<name>",
+		"color": 2
+		},
+		{
+		"player": "<name>",
+		"color": 3
+		}
+		]
+	)
+	add_option.emit(
+		{
+		"group_id": "not grouped",
+		"for_player": 0,
+		"id": "d6c86421-6968-4c65-948e-c634901d9487",
+		"type": "select_pirate",
+		"pirate_id": "1c1e6f8c-f858-46e6-9d93-8f158c6a0dc3"
+		})
+	'''await get_tree().create_timer(2).timeout
 	execute_action.emit({
 		"for_player": -1,
 		"type": "spawn_ship",
@@ -108,11 +137,11 @@ func test():
 		execute_action.emit({
 			"type": "move_pirate",
 			"position": {
-				"x": 1,
-				"y": 7
+				"x": 0,
+				"y": 6
 			},
 			"pirate_id": "%s" % i
-		})
+		})'''
 
 
 func _ready():
