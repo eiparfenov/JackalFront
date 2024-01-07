@@ -51,6 +51,7 @@ func _on_websocket_game_started(selected_color: int, game_info: Array):
 
 func _on_websocket_execute_action(action: Dictionary):
 	if action["type"] == "player_move":
+		pirate_button = 0
 		for button in $PirateChooser.get_children():
 			button.queue_free()
 
