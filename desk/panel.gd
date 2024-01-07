@@ -69,17 +69,17 @@ func _on_websocket_add_option(option: Dictionary):
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.pressed.connect(_on_pirate_button_pressed.bind(pirate))
+		button.pressed.connect(_on_pirate_button_pressed.bind(pirate, option["id"]))
 		button.mouse_entered.connect(_on_pirate_button_entered.bind(pirate))
 		button.mouse_exited.connect(_on_pirate_button_exited.bind(pirate))
 
 
 var zoom = [1, 1.5]
-func _on_pirate_button_pressed(pirate):
+func _on_pirate_button_pressed(pirate, id):
 	for button in $PirateChooser.get_children():
 		button.visible = false
 	pirate.scale = Vector2(zoom[1], zoom[1])
-	websocket.select_option(pirate.name)	
+	websocket.select_option(id)	
 
 
 func _on_pirate_button_entered(pirate):
