@@ -103,6 +103,12 @@ func test():
 		"pirate_id": "1",
 		"take_items": []
 		})
+	await get_tree().create_timer(3).timeout
+	execute_action.emit(
+		{
+		"type": "player_move",
+		"current_player": 1
+		})
 
 
 func _ready():

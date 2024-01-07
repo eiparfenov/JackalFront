@@ -2,12 +2,14 @@ extends Control
 
 @onready var websocket: Websocket = get_node("/root/WebSocket")
 
+var money_scene: PackedScene = preload("res://tiles/money.tscn")
 var color = ["ffffff", "000000", "ff0000", "ffe600"]
 
 
 func _ready():
 	websocket.game_started.connect(_on_websocket_game_started)
 	websocket.add_option.connect(_on_websocket_add_option)
+	websocket.execute_action.connect(_on_websocket_execute_action)
 
 
 func _on_websocket_game_started(selected_color: int, game_info: Array):
@@ -25,16 +27,33 @@ func _on_websocket_game_started(selected_color: int, game_info: Array):
 		nickname_label.size = Vector2(200, 30)
 		var money_label = Label.new()
 		$PlayerLabels.add_child(money_label)
-		money_label.text = "x0"
-		money_label.name = "money_%s" % game_info[i]["color"]
+		money_label.text = "x 0"
+		money_label.name = "money_label_%s" % game_info[i]["color"]
 		money_label.z_index = 1
 		money_label.position = Vector2(600, 170 + 50 * i)
+		var money_icon = money_scene.instantiate()
+		$PlayerLabels.add_child(money_icon)
+		money_icon.name = "money_icon_%s" % game_info[i]["color"]
+		money_icon.z_index = 1
+		money_icon.position = Vector2(560, 185 + 50 * i)
 		var rum_label = Label.new()
 		$PlayerLabels.add_child(rum_label)
-		rum_label.text = "x0"
-		rum_label.name = "rum_%s" % game_info[i]["color"]
+		rum_label.text = "x 0"
+		rum_label.name = "rum_label_%s" % game_info[i]["color"]
 		rum_label.z_index = 1
 		rum_label.position = Vector2(800, 170 + 50 * i)
+		var rum_icon = money_scene.instantiate()
+		$PlayerLabels.add_child(rum_icon)
+		rum_icon.name = "rum_icon_%s" % game_info[i]["color"]
+		rum_icon.z_index = 1
+		rum_icon.position = Vector2(760, 185 + 50 * i)
+
+
+func _on_websocket_execute_action(action: Dictionary):
+	if action["type"] == "player_move":
+		for button in $PirateChooser.get_children():
+			button.queue_free()
+
 
 var pirate_button = 0
 func _on_websocket_add_option(option: Dictionary):

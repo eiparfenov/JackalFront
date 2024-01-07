@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmkc7n2idp73t"]
+
+[ext_resource type="Texture2D" uid="uid://830txjh01cc4" path="res://assets/jackal_2.png" id="1_u5scm"]
+
+[node name="Money" type="Sprite2D"]
+texture = ExtResource("1_u5scm")

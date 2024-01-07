@@ -51,6 +51,11 @@ func _on_websocket_execute_action(action: Dictionary):
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		old_tile.remove_child(pirate)
 		new_tile.add_child(pirate)
+	elif action["type"] == "player_move":
+		for tile in $TileField.get_children():
+			for elem in tile.get_children():
+				if elem is Area2D:
+					elem.queue_free()
 	elif action["type"] == "open_card":
 		var tile = get_node("./TileField/tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])
@@ -66,7 +71,7 @@ func _on_websocket_add_option(option: Dictionary):
 		var area = Area2D.new()
 		area.name = "area_%s_%s" % [option["position"]["x"], option["position"]["y"]]
 		available_tile.add_child(area)
-		area.input_event.connect(func(node, event, shape_idx): _on_mouse_is_pressed(available_tile, event))
+		area.input_event.connect(func(node, event, shape_idx): _on_mouse_is_pressed(available_tile, event, option["id"]))
 		var shape = CollisionShape2D.new()
 		shape.name = "shape_%s_%s" % [option["position"]["x"], option["position"]["y"]]
 		area.add_child(shape)
@@ -74,6 +79,7 @@ func _on_websocket_add_option(option: Dictionary):
 		shape.shape.size = Vector2(200, 200)
 
 
-func _on_mouse_is_pressed(tile, event):
+func _on_mouse_is_pressed(tile, event, id):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+		websocket.select_option(id)
 		print(1)
