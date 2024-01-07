@@ -49,19 +49,19 @@ func test():
 		1,  
 		[
 		{
-		"player": "<name>",
+		"player": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 0
 		},
 		{
-		"player": "<name>",
+		"player": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 1
 		},
 		{
-		"player": "<name>",
+		"player": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 2
 		},
 		{
-		"player": "<name>",
+		"player": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 3
 		}
 		]

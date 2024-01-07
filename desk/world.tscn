@@ -67,7 +67,7 @@ script = ExtResource("3_5jk1f")
 layout_mode = 0
 offset_right = 870.0
 offset_bottom = 1080.0
-color = Color(0.745098, 0.745098, 0.745098, 1)
+color = Color(0.486275, 0.486275, 0.486275, 1)
 
 [node name="JackalLabel" type="Label" parent="UI/Panel"]
 z_index = 1
