@@ -76,7 +76,8 @@ var zoom = [1, 1.5]
 func _on_pirate_button_pressed(pirate):
 	for button in $PirateChooser.get_children():
 		button.visible = false
-		pirate.scale = Vector2(zoom[1], zoom[1])
+	pirate.scale = Vector2(zoom[1], zoom[1])
+	websocket.select_option(pirate.name)	
 
 
 func _on_pirate_button_entered(pirate):
