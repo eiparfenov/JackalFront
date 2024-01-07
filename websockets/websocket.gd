@@ -12,7 +12,7 @@ var socket: WebSocketPeer = WebSocketPeer.new()
 
 
 func select_option(option_id: String):
-	pass
+	socket.send_text(option_id)
 
 
 func start_game(player_name: String, selected_color: int):
@@ -125,7 +125,7 @@ func _process(delta):
 	var state = socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
-			_process_packet(socket.get_packet().get_string_from_utf8())
+			await _process_packet(socket.get_packet().get_string_from_utf8())
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
@@ -140,10 +140,12 @@ func _process_packet(packet):
 	var response = str_to_var(packet)
 	match response:
 		{"event_type": "game_started", "color": var color, "players": var players}:
-			game_started.emit(color, players)
+			print("start")
+			game_started.emit(int(color), players)
 		{"event_type": "game_step", "actions": var actions, "options": var options}:
-			for opt in options:
-				print(opt)
 			for act in actions:
-				print(act)	
+				execute_action.emit(act)
+			for opt in options:
+				add_option.emit(opt)
+			
 			

@@ -19,8 +19,8 @@ func _on_websocket_game_started(selected_color: int, game_info: Array):
 	for i in range(0, len(game_info)):
 		var nickname_label = Label.new()
 		$PlayerLabels.add_child(nickname_label)
-		nickname_label.modulate = color[game_info[i]["color"]]
-		nickname_label.text = game_info[i]["player"]
+		nickname_label.modulate = color[int(game_info[i]["color"])]
+		nickname_label.text = game_info[i]["name"]
 		nickname_label.name = "player_%s" % game_info[i]["color"]
 		nickname_label.position = Vector2(50, 170 + 50 * i)
 		nickname_label.z_index = 1
@@ -59,7 +59,9 @@ var pirate_button = 0
 func _on_websocket_add_option(option: Dictionary):
 	if option["type"] == "select_pirate":
 		pirate_button += 1
+		var pirate_id = option["pirate_id"]
 		var pirate = get_parent().get_parent().find_child(option["pirate_id"], true, false)
+		print(pirate_id, " ", pirate)
 		var button = Button.new()
 		$PirateChooser.add_child(button)
 		button.modulate = "00ff00"
@@ -77,6 +79,7 @@ var zoom = [1, 1.5]
 func _on_pirate_button_pressed(id, pirate):
 	var button = $PirateChooser.get_node(id)
 	condition += 1
+	websocket.select_option(id)
 	for other_button in $PirateChooser.get_children():
 		if other_button != button:
 			other_button.disabled = condition % 2
