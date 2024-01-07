@@ -20,7 +20,7 @@ func _on_child_entered_tree(node):
 
 
 func _on_child_exiting_tree(node):
-	recalculate_children() 
+	recalculate_children([node.name]) 
 
 
 var children_position = {1: [

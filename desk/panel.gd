@@ -52,6 +52,7 @@ func _on_websocket_add_option(option: Dictionary):
 		button.mouse_entered.connect(func (): _on_pirate_button_entered(String(button.name), pirate))
 		button.mouse_exited.connect(func (): _on_pirate_button_exited(String(button.name), pirate))
 
+
 var condition: int = 0
 var zoom = [1, 1.5]
 func _on_pirate_button_pressed(id, pirate):
@@ -62,10 +63,12 @@ func _on_pirate_button_pressed(id, pirate):
 			other_button.disabled = condition % 2
 			pirate.scale = Vector2(zoom[condition % 2], zoom[condition % 2])
 
+
 func _on_pirate_button_entered(id, pirate):
 	var button = $PirateChooser.get_node(id)
 	if button.disabled == false:
 		pirate.scale = Vector2(zoom[1], zoom[1])
+
 
 func _on_pirate_button_exited(id, pirate):
 	var button = $PirateChooser.get_node(id)

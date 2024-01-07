@@ -90,6 +90,19 @@ func test():
 		"type": "select_pirate",
 		"pirate_id": "2"
 		})
+	add_option.emit(
+		{
+		"group_id": "not grouped",
+		"for_player": 0,
+		"id": "555",
+		"type": "move_pirate",
+		"position": {
+		"x": -6,
+		"y": 0
+		},
+		"pirate_id": "1",
+		"take_items": []
+		})
 
 
 func _ready():

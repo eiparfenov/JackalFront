@@ -9,6 +9,7 @@ var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
 
 func _ready():
 	websocket.execute_action.connect(_on_websocket_execute_action)
+	websocket.add_option.connect(_on_websocket_add_option)
 	var field_size = [17, 17]
 	var water_range = [2, 2]
 	for x in field_size[0]:
@@ -52,3 +53,23 @@ func _on_websocket_execute_action(action: Dictionary):
 		tile.open_frame(action["frame"], action["rotation"])
 	elif action["type"] == "ready_to_start":
 		$UI/WaitingFiller.visible = false
+
+
+func _on_websocket_add_option(option: Dictionary):
+	if option["type"] == "move_pirate":
+		var pirate = find_child(option["pirate_id"], true, false)
+		var old_tile = pirate.get_parent()
+		var available_tile = get_node("./tile_%s_%s" % [option["position"]["x"], option["position"]["y"]])
+		var area = Area2D.new()
+		area.name = "area_%s_%s" % [option["position"]["x"], option["position"]["y"]]
+		available_tile.add_child(area)
+		area.input_event.connect(func(): _on_mouse_is_pressed(available_tile))
+		var shape = CollisionShape2D.new()
+		shape.name = "shape_%s_%s" % [option["position"]["x"], option["position"]["y"]]
+		area.add_child(shape)
+		shape.shape = RectangleShape2D.new()
+		shape.shape.size = Vector2(200, 200)
+
+
+func _on_mouse_is_pressed(tile):
+	print(1)
