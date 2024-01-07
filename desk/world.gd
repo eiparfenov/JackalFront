@@ -73,3 +73,4 @@ func _on_websocket_add_option(option: Dictionary):
 
 func _on_mouse_is_pressed(tile):
 	print(1)
+

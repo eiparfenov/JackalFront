@@ -48,9 +48,9 @@ func _on_websocket_add_option(option: Dictionary):
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.pressed.connect(func (): _on_pirate_button_pressed(String(button.name), pirate))
-		button.mouse_entered.connect(func (): _on_pirate_button_entered(String(button.name), pirate))
-		button.mouse_exited.connect(func (): _on_pirate_button_exited(String(button.name), pirate))
+		button.pressed.connect(_on_pirate_button_pressed.bind(String(button.name), pirate))
+		button.mouse_entered.connect(_on_pirate_button_entered.bind(String(button.name), pirate))
+		button.mouse_exited.connect(_on_pirate_button_exited.bind(String(button.name), pirate))
 
 
 var condition: int = 0
