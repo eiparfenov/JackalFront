@@ -74,11 +74,6 @@ func _on_websocket_add_option(option: Dictionary):
 		shape.shape.size = Vector2(200, 200)
 
 
-<<<<<<< Updated upstream
-func _on_mouse_is_pressed(tile):
-	print(1)
-=======
 func _on_mouse_is_pressed(tile, event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
-		pass
->>>>>>> Stashed changes
+		print(1)
