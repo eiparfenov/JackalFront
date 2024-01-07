@@ -69,30 +69,22 @@ func _on_websocket_add_option(option: Dictionary):
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.pressed.connect(_on_pirate_button_pressed.bind(String(button.name), pirate))
-		button.mouse_entered.connect(_on_pirate_button_entered.bind(String(button.name), pirate))
-		button.mouse_exited.connect(_on_pirate_button_exited.bind(String(button.name), pirate))
+		button.pressed.connect(_on_pirate_button_pressed.bind(pirate))
+		button.mouse_entered.connect(_on_pirate_button_entered.bind(pirate))
+		button.mouse_exited.connect(_on_pirate_button_exited.bind(pirate))
 
 
-var condition: int = 0
 var zoom = [1, 1.5]
-func _on_pirate_button_pressed(id, pirate):
-	var button = $PirateChooser.get_node(id)
-	condition += 1
-	websocket.select_option(id)
-	for other_button in $PirateChooser.get_children():
-		if other_button != button:
-			other_button.disabled = condition % 2
-			pirate.scale = Vector2(zoom[condition % 2], zoom[condition % 2])
+func _on_pirate_button_pressed(pirate):
+	for button in $PirateChooser.get_children():
+		button.visible = false
+	pirate.scale = Vector2(zoom[1], zoom[1])
+	websocket.select_option(pirate.name)	
 
 
-func _on_pirate_button_entered(id, pirate):
-	var button = $PirateChooser.get_node(id)
-	if button.disabled == false:
-		pirate.scale = Vector2(zoom[1], zoom[1])
+func _on_pirate_button_entered(pirate):
+	pirate.scale = Vector2(zoom[1], zoom[1])
 
 
-func _on_pirate_button_exited(id, pirate):
-	var button = $PirateChooser.get_node(id)
-	if condition % 2 == 0:
-		pirate.scale = Vector2(zoom[0], zoom[0])
+func _on_pirate_button_exited(pirate):
+	pirate.scale = Vector2(zoom[0], zoom[0])
