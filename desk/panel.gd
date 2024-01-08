@@ -62,7 +62,6 @@ func _on_websocket_add_option(option: Dictionary):
 		pirate_button += 1
 		var pirate_id = option["pirate_id"]
 		var pirate = get_parent().get_parent().find_child(option["pirate_id"], true, false)
-		print(pirate_id, " ", pirate)
 		var button = Button.new()
 		$PirateChooser.add_child(button)
 		button.modulate = "00ff00"

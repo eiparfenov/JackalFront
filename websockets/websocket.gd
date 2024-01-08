@@ -49,19 +49,19 @@ func test():
 		1,  
 		[
 		{
-		"player": "JackalJackalJackalJackalJackalJackalJackal",
+		"name": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 0
 		},
 		{
-		"player": "JackalJackalJackalJackalJackalJackalJackal",
+		"name": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 1
 		},
 		{
-		"player": "JackalJackalJackalJackalJackalJackalJackal",
+		"name": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 2
 		},
 		{
-		"player": "JackalJackalJackalJackalJackalJackalJackal",
+		"name": "JackalJackalJackalJackalJackalJackalJackal",
 		"color": 3
 		}
 		]
@@ -108,6 +108,17 @@ func test():
 		{
 		"type": "player_move",
 		"current_player": 1
+		})
+	execute_action.emit(
+		{
+		"for_player": -1,
+		"type": "spawn_item",
+		"item_id": "c3ea0061-385d-452c-bc67-fa1c749bc0b2",
+		"item_type": "coin",
+		"position": {
+		"x": -7,
+		"y": 0
+		}
 		})
 
 

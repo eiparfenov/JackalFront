@@ -3,6 +3,8 @@ extends Node2D
 var tile_scene: PackedScene = preload("res://tiles/tile.tscn")
 var ship_scene: PackedScene = preload("res://tiles/ship.tscn")
 var pirate_scene: PackedScene = preload("res://tiles/pirate.tscn")
+var item_scene: PackedScene = preload("res://tiles/item.tscn")
+var node_scene: PackedScene = preload("res://desk/node.tscn")
 
 @onready var websocket: Websocket = get_node("/root/WebSocket") 
 
@@ -25,6 +27,9 @@ func _ready():
 				tile.open_frame(63)
 			else:
 				tile.open_frame(0)
+			var coin_node = node_scene.instantiate()
+			coin_node.name = "coin_%s_%s" % [x - field_size[0] / 2, y - field_size[1] / 2]
+			tile.add_child(coin_node)
 
 
 func _on_websocket_execute_action(action: Dictionary):
@@ -51,6 +56,11 @@ func _on_websocket_execute_action(action: Dictionary):
 		pirate.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		old_tile.remove_child(pirate)
 		new_tile.add_child(pirate)
+		pirate.scale = Vector2(1, 1)
+		for tile in $TileField.get_children():
+			for elem in tile.get_children():
+				if elem is Area2D:
+					elem.queue_free()
 	elif action["type"] == "player_move":
 		for tile in $TileField.get_children():
 			for elem in tile.get_children():
@@ -59,6 +69,13 @@ func _on_websocket_execute_action(action: Dictionary):
 	elif action["type"] == "open_card":
 		var tile = get_node("./TileField/tile_%s_%s" % [action["position"]["x"], action["position"]["y"]])
 		tile.open_frame(action["frame"], action["rotation"])
+	elif action["type"] == "spawn_item" and action["item_type"] == "coin":
+		var coin = Node2D.new()
+		var coin_node = get_node("./TileField/tile_%s_%s/coin_%s_%s" % [action["position"]["x"], action["position"]["y"], action["position"]["x"], action["position"]["y"]])
+		coin.name = action["item_id"]
+		coin.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
+		coin_node.add_child(coin)
+		print(0)
 	elif action["type"] == "ready_to_start":
 		$UI/WaitingFiller.visible = false
 
@@ -82,4 +99,3 @@ func _on_websocket_add_option(option: Dictionary):
 func _on_mouse_is_pressed(tile, event, id):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		websocket.select_option(id)
-		print(1)

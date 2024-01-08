@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d33s7q0rql5sk"]
+
+[ext_resource type="Texture2D" uid="uid://830txjh01cc4" path="res://assets/jackal_2.png" id="1_7s0dg"]
+[ext_resource type="Script" path="res://tiles/item.gd" id="2_dwyi6"]
+
+[node name="Item" type="Sprite2D"]
+z_index = 2
+texture = ExtResource("1_7s0dg")
+script = ExtResource("2_dwyi6")
