@@ -57,11 +57,11 @@ func _on_websocket_execute_action(action: Dictionary):
 
 
 var pirate_button = 0
+var items_button = 0
 func _on_websocket_add_option(option: Dictionary):
 	if option["type"] == "select_pirate":
 		pirate_button += 1
-		var pirate_id = option["pirate_id"]
-		var pirate = get_parent().get_parent().find_child(option["pirate_id"], true, false)
+		var pirate = [get_parent().get_parent().find_child(option["pirate_id"], true, false)]
 		var button = Button.new()
 		$PirateChooser.add_child(button)
 		button.modulate = "00ff00"
@@ -69,22 +69,41 @@ func _on_websocket_add_option(option: Dictionary):
 		button.z_index = 1
 		button.size = Vector2(100, 100)
 		button.name = option["id"]
-		button.pressed.connect(_on_pirate_button_pressed.bind(pirate, option["id"]))
-		button.mouse_entered.connect(_on_pirate_button_entered.bind(pirate))
-		button.mouse_exited.connect(_on_pirate_button_exited.bind(pirate))
-
+		button.pressed.connect(_on_object_button_pressed.bind(pirate, option["id"], "PirateChooser"))
+		button.mouse_entered.connect(_on_object_button_entered.bind(pirate))
+		button.mouse_exited.connect(_on_object_button_exited.bind(pirate))
+	elif option["type"] == "select_items":
+		items_button += 1
+		var taken_items = option["items_id"]
+		var button = Button.new()
+		var items = []
+		for item in taken_items:
+			items.append(get_parent().get_parent().find_child("item_%s" % get_parent().get_parent().find_child(item, true, false).get_parent().name, true, false))
+		$ItemChooser.add_child(button)
+		button.modulate = "00ff00"
+		button.position = Vector2(items_button * 200, 650)
+		button.z_index = 1
+		button.size = Vector2(100, 100)
+		button.name = option["id"]
+		button.pressed.connect(_on_object_button_pressed.bind(items, option["id"], "ItemChooser"))
+		button.mouse_entered.connect(_on_object_button_entered.bind(items))
+		button.mouse_exited.connect(_on_object_button_exited.bind(items))
+		
 
 var zoom = [1, 1.5]
-func _on_pirate_button_pressed(pirate, id):
-	for button in $PirateChooser.get_children():
+func _on_object_button_pressed(objects, id, path):
+	for button in get_node(path).get_children():
 		button.visible = false
-	pirate.scale = Vector2(zoom[1], zoom[1])
-	websocket.select_option(id)	
+	for object in objects:
+		object.scale = Vector2(zoom[1], zoom[1])
+	websocket.select_option(id)
 
 
-func _on_pirate_button_entered(pirate):
-	pirate.scale = Vector2(zoom[1], zoom[1])
+func _on_object_button_entered(objects):
+	for object in objects:
+		object.scale = Vector2(zoom[1], zoom[1])
 
 
-func _on_pirate_button_exited(pirate):
-	pirate.scale = Vector2(zoom[0], zoom[0])
+func _on_object_button_exited(objects):
+	for object in objects:
+		object.scale = Vector2(zoom[0], zoom[0])

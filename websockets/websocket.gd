@@ -120,6 +120,17 @@ func test():
 		"y": 0
 		}
 		})
+	execute_action.emit(
+		{
+		"for_player": -1,
+		"type": "spawn_item",
+		"item_id": "a3ea0061-385d-452c-bc67-fa1c749bc0b2",
+		"item_type": "coin",
+		"position": {
+		"x": -7,
+		"y": 0
+		}
+		})
 	await get_tree().create_timer(3).timeout
 	execute_action.emit(
 		{
@@ -132,13 +143,14 @@ func test():
 		"y": 0
 		}
 		})
-	await get_tree().create_timer(3).timeout
-	execute_action.emit(
+	add_option.emit(
 		{
-		"for_player": -1,
-		"type": "remove_item",
-		"item_id": "c3ea0061-385d-452c-bc67-fa1c749bc0b2",
-		"item_type": "coin",
+		"id": "a9b85c30-5914-4d79-8e51-ff8df23747c1",
+		"type": "select_items",
+		"items_id": [
+		"c3ea0061-385d-452c-bc67-fa1c749bc0b2",
+		"a3ea0061-385d-452c-bc67-fa1c749bc0b2"
+		]
 		})
 
 

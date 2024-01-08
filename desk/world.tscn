@@ -87,3 +87,8 @@ vertical_alignment = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ItemChooser" type="Control" parent="UI/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
