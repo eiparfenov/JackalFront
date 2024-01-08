@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4i6b235xaipm"]
+
+[ext_resource type="Texture2D" uid="uid://dxi4bu6gn1e77" path="res://assets/pirates.png" id="1_d6o7g"]
+[ext_resource type="Script" path="res://tiles/pirate.gd" id="1_yct3l"]
+
+[node name="Pirate" type="Sprite2D"]
+z_index = 2
+texture = ExtResource("1_d6o7g")
+hframes = 7
+script = ExtResource("1_yct3l")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgqnf08bn0ke7"]
+
+[ext_resource type="Texture2D" uid="uid://i3em8e5cxxh3" path="res://assets/pictures.png" id="1_njr0p"]
+[ext_resource type="Script" path="res://tiles/tile.gd" id="2_p0nt0"]
+
+[node name="Tile" type="Sprite2D"]
+texture = ExtResource("1_njr0p")
+hframes = 64
+frame = 4
+script = ExtResource("2_p0nt0")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

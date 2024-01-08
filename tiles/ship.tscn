@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7vy47vcbc55v"]
+
+[ext_resource type="Texture2D" uid="uid://tgoxeqo6uqhe" path="res://assets/ships.png" id="1_2b6ui"]
+[ext_resource type="Script" path="res://tiles/ship.gd" id="2_mdjd1"]
+
+[node name="Ship" type="Sprite2D"]
+z_index = 1
+texture = ExtResource("1_2b6ui")
+hframes = 4
+script = ExtResource("2_mdjd1")
