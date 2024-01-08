@@ -120,6 +120,26 @@ func test():
 		"y": 0
 		}
 		})
+	await get_tree().create_timer(3).timeout
+	execute_action.emit(
+		{
+		"for_player": -1,
+		"type": "move_item",
+		"item_id": "c3ea0061-385d-452c-bc67-fa1c749bc0b2",
+		"item_type": "coin",
+		"position": {
+		"x": -6,
+		"y": 0
+		}
+		})
+	await get_tree().create_timer(3).timeout
+	execute_action.emit(
+		{
+		"for_player": -1,
+		"type": "remove_item",
+		"item_id": "c3ea0061-385d-452c-bc67-fa1c749bc0b2",
+		"item_type": "coin",
+		})
 
 
 func _ready():
@@ -158,5 +178,3 @@ func _process_packet(packet):
 				execute_action.emit(act)
 			for opt in options:
 				add_option.emit(opt)
-			
-			

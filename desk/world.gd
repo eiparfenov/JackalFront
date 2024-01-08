@@ -75,7 +75,17 @@ func _on_websocket_execute_action(action: Dictionary):
 		coin.name = action["item_id"]
 		coin.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
 		coin_node.add_child(coin)
-		print(0)
+	elif action["type"] == "move_item" and action["item_type"] == "coin":
+		var coin = find_child(action["item_id"], true, false)
+		var old_node = coin.get_parent()
+		var new_node = get_node("./TileField/tile_%s_%s/coin_%s_%s" % [action["position"]["x"], action["position"]["y"], action["position"]["x"], action["position"]["y"]])
+		coin.position = Vector2(action["position"]["x"], action["position"]["y"]) * 200
+		old_node.remove_child(coin)
+		new_node.add_child(coin)
+	elif action["type"] == "remove_item" and action["item_type"] == "coin":
+		var coin = find_child(action["item_id"], true, false)
+		var old_node = coin.get_parent()
+		old_node.remove_child(coin)
 	elif action["type"] == "ready_to_start":
 		$UI/WaitingFiller.visible = false
 

@@ -15,19 +15,19 @@ func recalculate_children(corrector = []):
 func item_editor(corrector = []):
 	var children_count = get_child_count() - corrector.size()
 	var children = get_parent().get_children().map(func(x): return x.name)
-	print(children)
 	if children_count > 0 and "item_%s" % name not in children:
 		var coin = item_scene.instantiate()
 		coin.name = "item_%s" % name
 		get_parent().add_child(coin)
-		print(2)
+	elif children_count == 0 and "item_%s" % name in children:
+		get_parent().get_node("item_%s" % name).queue_free()
 
 
 func _on_child_entered_tree(node):
-	print(1)
 	recalculate_children()
 	item_editor()
 
 
 func _on_child_exiting_tree(node):
-	recalculate_children([node.name]) 
+	recalculate_children([node.name])
+	item_editor([node.name])
